@@ -330,9 +330,8 @@ def show_artist(artist_id):
             { 'id': u.id,
              'name': db.session.query(Artist.name).filter_by(id = u.id).first(),
              'image_link': db.session.query(Artist.image_link).filter_by(id = u.id).first(),
-             'start_time': u.show_date.strftime("%m/%d/%Y, %H:%M:%S")
+             'show_date': u.show_date.strftime("%m/%d/%Y, %H:%M:%S")
             } )
-  
   past = Show.query.filter_by(artist_id = artist_id).filter(Show.show_date <= datetime.today())
   past_shows = []
   for p in past:
@@ -340,8 +339,9 @@ def show_artist(artist_id):
             { 'id': p.artist_id,
              'name': db.session.query(Artist.name).filter_by(id = p.artist_id).first(),
              'image_link': db.session.query(Artist.image_link).filter_by(id = p.artist_id).first(),
-             'start_time': p.show_date.strftime("%m/%d/%Y, %H:%M:%S")
+             'show_date': p.show_date.strftime("%m/%d/%Y, %H:%M:%S")
             } )
+
   print(upcoming_shows)
   print(past_shows)
 
